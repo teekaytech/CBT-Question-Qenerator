@@ -6,7 +6,7 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-Dotenv::Railtie.load
+Dotenv::Rails.load
 
 module CbtQuestionGenerator
   class Application < Rails::Application
@@ -28,12 +28,14 @@ module CbtQuestionGenerator
     #
     config.generators do |g|
       g.test_framework :rspec,
-        fixtures:         false,          # Skip fixtures (use Factory Bot instead)
-        view_specs:       true,
-        helper_specs:     true,
-        routing_specs:    true,
-        controller_specs: true,
-        request_specs:    false
+      fixtures:         false,          # Skip fixtures (use Factory Bot instead)
+      view_specs:       true,
+      helper_specs:     true,
+      routing_specs:    true,
+      controller_specs: true,
+      request_specs:    false
     end
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end
