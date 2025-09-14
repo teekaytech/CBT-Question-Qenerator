@@ -23,5 +23,15 @@ module CbtQuestionGenerator
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    #
+    config.generators do |g|
+      g.test_framework :rspec,
+        fixtures:         false,          # Skip fixtures (use Factory Bot instead)
+        view_specs:       true,
+        helper_specs:     true,
+        routing_specs:    true,
+        controller_specs: true,
+        request_specs:    false
+    end
   end
 end
