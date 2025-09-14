@@ -70,6 +70,8 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 6.0' # Check latest version at https://rubygems.org/gems/rspec-rails
   gem 'factory_bot_rails'     # For test data factories (optional but recommended)
+
+  gem 'dotenv-rails'
 end
 
 group :development do
