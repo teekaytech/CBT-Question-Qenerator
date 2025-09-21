@@ -61,8 +61,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_14_133104) do
   end
 
   create_table "uploads", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "cloudinary_url"
+    t.string "public_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

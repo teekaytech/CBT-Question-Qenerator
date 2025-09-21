@@ -20,20 +20,20 @@ gem "tailwindcss-rails"
 gem "jbuilder"
 
 # For PDF processing
-gem 'pdf-reader'
+gem "pdf-reader"
 
 # For Cloudinary integration
-gem 'cloudinary'
+gem "cloudinary"
 
-# For OpenAI API
-gem 'ruby-openai'
+# For Google Gemini API
+gem "gemini-ai", "~> 4.3"
 
 # For background processing
-gem 'sidekiq'
-gem 'sidekiq-failures'
+gem "sidekiq"
+gem "sidekiq-failures"
 
 # For deployment
-gem 'redis'
+gem "redis"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
@@ -68,10 +68,10 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 
-  gem 'rspec-rails', '~> 6.0' # Check latest version at https://rubygems.org/gems/rspec-rails
-  gem 'factory_bot_rails'     # For test data factories (optional but recommended)
+  gem "rspec-rails", "~> 6.0" # Check latest version at https://rubygems.org/gems/rspec-rails
+  gem "factory_bot_rails"     # For test data factories (optional but recommended)
 
-  gem 'dotenv-rails'
+  gem "dotenv-rails"
 end
 
 group :development do
