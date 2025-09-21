@@ -383,10 +383,6 @@ GEM
       rubocop (>= 1.72)
       rubocop-performance (>= 1.24)
       rubocop-rails (>= 2.30)
-    ruby-openai (8.3.0)
-      event_stream_parser (>= 0.3.0, < 2.0.0)
-      faraday (>= 1)
-      faraday-multipart (>= 1)
     ruby-progressbar (1.13.0)
     ruby-rc4 (0.1.5)
     rubyzip (3.1.0)
@@ -513,7 +509,6 @@ DEPENDENCIES
   redis
   rspec-rails (~> 6.0)
   rubocop-rails-omakase
-  ruby-openai
   selenium-webdriver
   sidekiq
   sidekiq-failures
