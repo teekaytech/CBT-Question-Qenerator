@@ -68,7 +68,7 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 
-  gem "rspec-rails", "~> 6.0" # Check latest version at https://rubygems.org/gems/rspec-rails
+  gem "rspec-rails", "~> 8.0" # Check latest version at https://rubygems.org/gems/rspec-rails
   gem "factory_bot_rails"     # For test data factories (optional but recommended)
 
   gem "dotenv-rails"
