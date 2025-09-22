@@ -24,7 +24,15 @@
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                 <%= link_to 'View Questions', upload, class: "text-blue-600 hover:text-blue-900 mr-3" %>
 
-                <!-- Updated delete link with data-turbo-method -->
+                <%= link_to 'Edit', edit_upload_path(upload), class: "text-green-600 hover:text-green-900 mr-3" %>
+
+                <%= link_to 'Regenerate Questions', regenerate_questions_upload_path(upload),
+                      data: {
+                        turbo_method: :patch,
+                        turbo_confirm: 'Are you sure you want to regenerate questions for this upload? This will delete all existing questions.'
+                      },
+                      class: "text-black mr-3" %>
+
                 <%= link_to 'Delete', upload,
                       data: {
                         turbo_method: :delete,

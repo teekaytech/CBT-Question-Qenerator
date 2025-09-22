@@ -1,5 +1,37 @@
 class UploadsController < ApplicationController
-  before_action :set_upload, only: [ :show, :destroy ]
+  before_action :set_upload, only: [ :show, :destroy, :regenerate_questions, :edit, :update, :toggle_show_answers ]
+
+  def toggle_show_answers
+    @upload.update(show_answers: !@upload.show_answers)
+    redirect_to @upload, notice: (@upload.show_answers? ? "Answers are now visible." : "Answers are now hidden.")
+  end
+
+  def edit
+    # @upload is set by before_action
+  end
+
+  def update
+    # @upload is set by before_action
+    if @upload.update(upload_update_params)
+      redirect_to uploads_path, notice: "Upload updated successfully."
+    else
+      render :edit
+    end
+  end
+
+  def upload_update_params
+    params.require(:upload).permit(:name, :number_of_objective_questions, :number_of_theory_questions, :show_answers)
+  end
+
+  def regenerate_questions
+    # Delete all existing questions and options for this upload
+    @upload.questions.destroy_all
+
+    # Re-run the PDF processing job to generate new questions
+    PdfProcessingJob.perform_now(@upload.id)
+
+    redirect_to uploads_path, notice: "Questions regenerated for '#{@upload.name}'."
+  end
 
   def index
     @uploads = Upload.all.order(created_at: :desc)
@@ -54,6 +86,6 @@ class UploadsController < ApplicationController
   end
 
   def upload_params
-    params.require(:upload).permit(:name, :pdf_file)
+  params.require(:upload).permit(:name, :pdf_file, :number_of_objective_questions, :number_of_theory_questions, :show_answers)
   end
 end

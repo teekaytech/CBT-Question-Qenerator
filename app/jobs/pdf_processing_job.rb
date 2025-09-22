@@ -9,7 +9,7 @@ class PdfProcessingJob < ApplicationJob
     pdf_text = PdfTextExtractor.extract_text(file_path)
 
     # Generate questions
-    service = GeminiQuestionService.new(pdf_text)
+    service = GeminiQuestionService.new(pdf_text, upload)
     questions_data = service.generate_questions
 
     # Create questions and options
