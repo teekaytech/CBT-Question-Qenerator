@@ -1,7 +1,10 @@
 <div class="container mx-auto px-4 py-8">
   <div class="flex justify-between items-center mb-6">
     <h1 class="text-3xl font-bold text-gray-800"><%= @upload.name %></h1>
-    <%= link_to 'Back to Uploads', uploads_path, class: "text-blue-600 hover:text-blue-800" %>
+    <div class="flex items-center space-x-4">
+      <%= link_to (@upload.show_answers? ? 'Hide answers' : 'Show answers'), toggle_show_answers_upload_path(@upload), data: { turbo_method: :patch }, class: "text-green-600 hover:text-green-800 mr-3" %>
+      <%= link_to 'Back to uploads', uploads_path, class: "text-blue-600 hover:text-blue-800" %>
+    </div>
   </div>
 
   <div class="mb-8">
@@ -15,9 +18,9 @@
             <% question.options.each_with_index do |option, opt_index| %>
               <div class="flex items-center mb-2">
                 <span class="font-medium mr-2"><%= ('A'.ord + opt_index).chr %>.</span>
-                <span class="<%= option.correct ? 'text-green-600 font-semibold' : 'text-gray-700' %>">
+                <span class="<%= option.correct && @upload.show_answers? ? 'text-green-600 font-semibold' : 'text-gray-700' %>">
                   <%= option.content %>
-                  <% if option.correct %>
+                  <% if option.correct && @upload.show_answers? %>
                     <span class="ml-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Correct Answer</span>
                   <% end %>
                 </span>

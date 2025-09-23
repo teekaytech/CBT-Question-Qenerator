@@ -1,0 +1,44 @@
+<%= form_with(model: upload, local: true, html: { class: "bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4" }) do |form| %>
+  <% if upload.errors.any? %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+      <h2 class="font-bold mb-2"><%= pluralize(upload.errors.count, "error") %> prohibited this upload from being saved:</h2>
+      <ul>
+        <% upload.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-4">
+    <%= form.label :name, "Document Name", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.text_field :name, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", required: true %>
+  </div>
+
+  <% if action_name == 'new' %>
+    <div class="mb-6">
+      <%= form.label :pdf_file, "PDF File", class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.file_field :pdf_file, accept: "application/pdf", class: "w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100", required: true %>
+    </div>
+  <% end %>
+
+  <div class="mb-4">
+    <%= form.label :number_of_objective_questions, "Number of Objective Questions", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.number_field :number_of_objective_questions, value: upload.number_of_objective_questions || 0, min: 0, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :number_of_theory_questions, "Number of Theory Questions", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.number_field :number_of_theory_questions, value: upload.number_of_theory_questions || 0, min: 0, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+  </div>
+
+  <div class="mb-4 flex items-center">
+    <%= form.check_box :show_answers, {}, true, false %>
+    <%= form.label :show_answers, "Show Answers", class: "ml-2 block text-gray-700 text-sm font-bold" %>
+  </div>
+
+  <div class="flex items-center justify-between">
+    <%= link_to 'Cancel', uploads_path, class: "bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+    <%= form.submit (action_name == 'edit' ? 'Update Upload' : 'Upload Document'), class: "bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+  </div>
+<% end %>

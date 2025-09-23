@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  # get "uploads/index"
-  # get "uploads/new"
-  # get "uploads/create"
-  # get "uploads/show"
-  # get "uploads/destroy"
-  resources :uploads
+  resources :uploads do
+    patch :regenerate_questions, on: :member
+    member do
+      get :edit
+      patch :update
+      patch :toggle_show_answers
+    end
+  end
   root "uploads#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

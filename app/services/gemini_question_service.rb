@@ -1,6 +1,7 @@
 class GeminiQuestionService
-  def initialize(pdf_text)
+  def initialize(pdf_text, upload)
     @pdf_text = pdf_text.truncate(30000) # Gemini 1.5 allows up to 1M tokens!
+    @upload = upload
   end
 
   def generate_questions
@@ -39,13 +40,13 @@ class GeminiQuestionService
 
   def build_prompt
     <<~PROMPT
-      ANALYZE THIS DOCUMENT AND GENERATE EDUCATIONAL QUESTIONS. MAKE SURE ALL QUESTIONS ARE CORRECT CONSTRUCT AND MEANINGFUL, BASED STRICTLY ON THE DOCUMENT CONTENT:
+      ANALYZE THIS DOCUMENT AND GENERATE EDUCATIONAL QUESTIONS. MAKE SURE ALL QUESTIONS ARE CORRECTLY CONSTRUCTED AND MEANINGFUL, BASED STRICTLY ON THE DOCUMENT CONTENT:
 
       DOCUMENT CONTENT:
       #{@pdf_text}
 
-      TASK: Generate exactly 50 high-quality multiple-choice questions (with 4 options each, one correct answer)
-      and 5 theory questions based strictly on the document content and ensure that no question is repeated.
+      TASK: Generate exactly #{@upload.number_of_objective_questions} high-quality multiple-choice questions (with 4 options each, one correct answer)
+      and exactly #{@upload.number_of_theory_questions} theory questions based strictly on the document content. Ensure that no question is repeated.
 
       REQUIREMENTS:
       1. Multiple-choice questions must test comprehension of key concepts
